@@ -40,6 +40,7 @@ class MixPugTask extends Task {
         this.locals = options.locals || {};
         this.extension = options.ext || '.html';
         this.excludePath = options.excludePath || null;
+        this.replacePath = options.replacePath || null;
 
         this.seeder = this.createSeeder();
 
@@ -165,6 +166,16 @@ class MixPugTask extends Task {
     prepareAssets(src) {
         let file = new File(src);
         let pathFromBase = this.relativePathFromSource(file.base(), this.excludePath);
+        if (this.replacePath && this.replacePath.length == 2) {
+            pathFromBase = pathFromBase.replace(this.replacePath[0], this.replacePath[1]);
+        } else if (this.replacePath) {
+            notifier.notify({
+                title: 'Pug Options Settings Failed',
+                message: 'Please make sure your replacePath options is an array with two values only.',
+                contentImage: 'node_modules/laravel-mix-pug/src/logo.png'
+            });
+            abort();
+        }
         let baseDir = (new File(path.join(pathFromBase, this.dest))).absolutePath;
 
         if (!File.exists(baseDir)) {
