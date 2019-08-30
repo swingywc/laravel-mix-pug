@@ -1,5 +1,4 @@
-> NOTE: This forked repository fix the bug that cannot create directories, and also add a `replacePath` option to use.
-> e.g. replacePath: ["resources/pug", "resources/views"] will replace the previous path with the coming path if exists.
+> NOTE: This forked repository fix the bug that cannot create directories, and also add a `replacePath` option to use. Please have a look at below feature to learn how to use it.
 
 # laravel-mix-pug
 Laravel Mix Plugin for compiling Pug/Jade templates.
@@ -87,6 +86,16 @@ i.e.: You want your destination file to be in `resources/assets/views` and the f
 mix.pug('resources/assets/pug/*.pug', 'resources/assets/views', {
     ext: '.blade.php',
     excludePath: 'resources/assets/pug'
+});
+````
+
+### replacePath (Added Feature)
+It will replace your target path with the one you want if it exists.
+i.e.: You want your destination file to be in `resources/views/**/*.html` but current file is in `resources/pug/**/*.pug`
+
+```js
+mix.pug('resources/pug/**/*.pug', '', {
+    replacePath: ['resources/pug', 'resources/views']
 });
 ````
 
