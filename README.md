@@ -1,3 +1,6 @@
+> NOTE: This forked repository fix the bug that cannot create directories, and also add a `replacePath` option to use.
+> e.g. replacePath: ["resources/pug", "resources/views"] will replace the previous path with the coming path if exists.
+
 # laravel-mix-pug
 Laravel Mix Plugin for compiling Pug/Jade templates.
 
